@@ -3,6 +3,30 @@
 import { Transaction } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import TransactionTypeBadge from "../_components/type-badge";
+import { Button } from "@/app/_components/ui/button";
+import { Pencil, TrashIcon } from "lucide-react";
+
+export const TRANSACTION_CATEGORY_LABELS = {
+  EDUCATION: "Educação",
+  ENTERNAINMENT: "Entretenimento",
+  FOOD: "Alimentação",
+  HEALTH: "Saúde",
+  HOUSING: "Moradia",
+  OTHER: "Outros",
+  SALARY: "Salário",
+  TRANSPORTATION: "Transporte",
+  UTILITY: "Utilidades",
+};
+
+export const TRANSACTION_PAYMETHOD_LABELS = {
+  CREDIT_CARD: "Cartão de Crédito",
+  DEBIT_CARD: "Cartão de Débito",
+  BANK_TRANSFER: "Transferência Bancária",
+  BANK_SLIP: "Depósito Bancário",
+  CASH: "Dinheiro",
+  PIX: "PIX",
+  OTHER: "Outros",
+};
 
 export const transactionColumns: ColumnDef<Transaction>[] = [
   {
@@ -19,75 +43,48 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
   {
     accessorKey: "category",
     header: "Categoria",
-    cell: ({row: {original: t}}) => {
-      switch (t.category) {
-        case "HOUSING":
-          return "Moradia"
-      
-        case "TRANSPORTATION":
-          return "Moradia"
-
-        case "FOOD":
-          return "Alimentação"
-
-        case "ENTERNAINMENT":
-          return "Lazer"
-
-        case "HEALTH":
-          return "Saúde"
-
-        case "UTILITY":
-          return "Utilidades"
-
-        case "SALARY":
-          return "Salário"
-
-        case "EDUCATION":
-          return "Educação"
-
-        default: 
-          return "Outros";
-      }
-    }
+    cell: ({ row: { original: t } }) => TRANSACTION_CATEGORY_LABELS[t.category],
   },
   {
     accessorKey: "paymenyMethod",
     header: "Método de pagamento",
-    cell: ({row: {original: t}}) => {
-      switch (t.paymenyMethod) {
-        case "CREDIT_CARD":
-          return "Cartão de Crédito"
-      
-        case "DEBIT_CARD":
-          return "Cartão de Débito"
-
-        case "BANK_TRANSFER":
-          return "Transferência Bancária"
-
-        case "BANK_SLIP":
-          return "Depósito Bancário"
-
-        case "CASH":
-          return "Dinheiro"
-
-        case "PIX":
-          return "PIX"
-
-        default: 
-          return "Outros";
-      }
-    }
+    cell: ({ row: { original: t } }) =>
+      TRANSACTION_PAYMETHOD_LABELS[t.paymenyMethod],
   },
   {
     accessorKey: "date",
     header: "Data",
+    cell: ({ row: { original: t } }) =>
+      new Date(t.date).toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      }),
   },
   {
     accessorKey: "amount",
     header: "Valor",
+    cell: ({ row: { original: t } }) =>
+      new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      }).format(Number(t.amount)),
   },
   {
     accessorKey: "actions",
-    header: "",
+    header: "Ações",
+    cell: () => {
+      return (
+        <div className="space-x-1">
+          <Button variant="ghost" size="icon" className="text-muted-foreground">
+            <Pencil />
+          </Button>
+
+          <Button variant="ghost" size="icon" className="text-muted-foreground">
+            <TrashIcon />
+          </Button>
+        </div>
+      );
+    },
   },
 ];
