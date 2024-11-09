@@ -1,4 +1,4 @@
-import { TransactionCategory, TransactionPaymentMethod } from "@prisma/client";
+import { TransactionCategory, TransactionPaymentMethod, TransactionType } from "@prisma/client";
 
 export const TRANSACTION_CATEGORY_LABELS = {
   EDUCATION: "Educação",
@@ -27,6 +27,21 @@ export const TRANSACTION_TYPE_LABELS = {
   DEPOSIT: "Depósito",
   INVESTMENT: "Investimento",
 };
+
+export const TRANSACTION_TYPE_OPTIONS = [
+  {
+    value: TransactionType.EXPENSE,
+    label: TRANSACTION_TYPE_LABELS[TransactionType.EXPENSE],
+  },
+  {
+    value: TransactionType.DEPOSIT,
+    label: TRANSACTION_TYPE_LABELS[TransactionType.DEPOSIT],
+  },
+  {
+    value: TransactionType.INVESTMENT,
+    label: TRANSACTION_TYPE_LABELS[TransactionType.INVESTMENT],
+  },
+];
 
 export const TRANSACTION_PAYMENT_METHOD_OPTIONS = [
   {
