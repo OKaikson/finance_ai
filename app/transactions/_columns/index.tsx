@@ -25,10 +25,10 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
     cell: ({ row: { original: t } }) => TRANSACTION_CATEGORY_LABELS[t.category],
   },
   {
-    accessorKey: "paymenyMethod",
+    accessorKey: "paymentMethod",
     header: "Método de pagamento",
     cell: ({ row: { original: t } }) =>
-      TRANSACTION_PAYMETHOD_LABELS[t.paymenyMethod],
+      TRANSACTION_PAYMETHOD_LABELS[t.paymentMethod],
   },
   {
     accessorKey: "date",

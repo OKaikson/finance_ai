@@ -1,4 +1,4 @@
-import { TransactionCategory, TransactionPaymenyMethod } from "@prisma/client";
+import { TransactionCategory, TransactionPaymentMethod } from "@prisma/client";
 
 export const TRANSACTION_CATEGORY_LABELS = {
   EDUCATION: "Educação",
@@ -30,32 +30,32 @@ export const TRANSACTION_TYPE_LABELS = {
 
 export const TRANSACTION_PAYMENT_METHOD_OPTIONS = [
   {
-    value: TransactionPaymenyMethod.BANK_TRANSFER,
-    label: TRANSACTION_PAYMETHOD_LABELS[TransactionPaymenyMethod.BANK_TRANSFER],
+    value: TransactionPaymentMethod.BANK_TRANSFER,
+    label: TRANSACTION_PAYMETHOD_LABELS[TransactionPaymentMethod.BANK_TRANSFER],
   },
   {
-    value: TransactionPaymenyMethod.BANK_SLIP,
-    label: TRANSACTION_PAYMETHOD_LABELS[TransactionPaymenyMethod.BANK_SLIP],
+    value: TransactionPaymentMethod.BANK_SLIP,
+    label: TRANSACTION_PAYMETHOD_LABELS[TransactionPaymentMethod.BANK_SLIP],
   },
   {
-    value: TransactionPaymenyMethod.CASH,
-    label: TRANSACTION_PAYMETHOD_LABELS[TransactionPaymenyMethod.CASH],
+    value: TransactionPaymentMethod.CASH,
+    label: TRANSACTION_PAYMETHOD_LABELS[TransactionPaymentMethod.CASH],
   },
   {
-    value: TransactionPaymenyMethod.CREDIT_CARD,
-    label: TRANSACTION_PAYMETHOD_LABELS[TransactionPaymenyMethod.CREDIT_CARD],
+    value: TransactionPaymentMethod.CREDIT_CARD,
+    label: TRANSACTION_PAYMETHOD_LABELS[TransactionPaymentMethod.CREDIT_CARD],
   },
   {
-    value: TransactionPaymenyMethod.DEBIT_CARD,
-    label: TRANSACTION_PAYMETHOD_LABELS[TransactionPaymenyMethod.DEBIT_CARD],
+    value: TransactionPaymentMethod.DEBIT_CARD,
+    label: TRANSACTION_PAYMETHOD_LABELS[TransactionPaymentMethod.DEBIT_CARD],
   },
   {
-    value: TransactionPaymenyMethod.OTHER,
-    label: TRANSACTION_PAYMETHOD_LABELS[TransactionPaymenyMethod.OTHER],
+    value: TransactionPaymentMethod.OTHER,
+    label: TRANSACTION_PAYMETHOD_LABELS[TransactionPaymentMethod.OTHER],
   },
   {
-    value: TransactionPaymenyMethod.PIX,
-    label: TRANSACTION_PAYMETHOD_LABELS[TransactionPaymenyMethod.PIX],
+    value: TransactionPaymentMethod.PIX,
+    label: TRANSACTION_PAYMETHOD_LABELS[TransactionPaymentMethod.PIX],
   },
 ];
 

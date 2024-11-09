@@ -15,7 +15,7 @@ import {
 } from "./ui/dialog";
 import {
   TransactionCategory,
-  TransactionPaymenyMethod,
+  TransactionPaymentMethod,
   TransactionType,
 } from "@prisma/client";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -43,6 +43,8 @@ import {
   TRANSACTION_TYPE_LABELS,
 } from "../_constants/transaction";
 import { DatePicker } from "./ui/date-picker";
+import { addTransaction } from "../_actions/add-transaction";
+import { useState } from "react";
 
 const TRANSACTION_TYPE_OPTIONS = [
   {
@@ -63,8 +65,10 @@ const formSchema = z.object({
   name: z.string().trim().min(1, {
     message: "O nome é obrigatório",
   }),
-  amount: z.string().trim().min(1, {
-    message: "O valor é obrigatório",
+  amount: z.number({
+    required_error: "O valor é obrigatório",
+  }).positive({
+    message: "O valor deve ser positivo.",    
   }),
   type: z.nativeEnum(TransactionType, {
     required_error: "O tipo é obrigatório",
@@ -72,7 +76,7 @@ const formSchema = z.object({
   category: z.nativeEnum(TransactionCategory, {
     required_error: "A categoria é obrigatória",
   }),
-  paymentMethod: z.nativeEnum(TransactionPaymenyMethod, {
+  paymentMethod: z.nativeEnum(TransactionPaymentMethod, {
     required_error: "O método de pagamento é obrigatório",
   }),
   date: z.date({
@@ -83,27 +87,36 @@ const formSchema = z.object({
 type FormSchema = z.infer<typeof formSchema>;
 
 const AddTransactionButton = () => {
+  const [dialogIsOpen, setDialogIsOpen] = useState(false)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      amount: "",
+      amount: 0,
       category: TransactionCategory.OTHER,
       date: new Date(),
       name: "",
-      paymentMethod: TransactionPaymenyMethod.CASH,
+      paymentMethod: TransactionPaymentMethod.CASH,
       type: TransactionType.EXPENSE,
     },
   });
 
-  const onSubmit = (data: FormSchema) => {
-    console.log(data);
-    
+  const onSubmit = async (data: FormSchema) => {        
+    try {
+      await addTransaction(data);
+      setDialogIsOpen(false);
+      form.reset();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div>
       <Dialog
+        open={dialogIsOpen}
         onOpenChange={(open) => {
+          setDialogIsOpen(open);
           if (!open) {
             form.reset();
           }
@@ -144,7 +157,15 @@ const AddTransactionButton = () => {
                   <FormItem>
                     <FormLabel>Valor</FormLabel>
                     <FormControl>
-                      <MoneyInput placeholder="Digite o valor..." {...field} />
+                      <MoneyInput
+                        placeholder="Digite o valor..."
+                        value={field.value}
+                        onValueChange={({floatValue}) => 
+                          field.onChange(floatValue)
+                        }
+                        onBlur={field.onBlur}
+                        disabled={field.disabled}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
