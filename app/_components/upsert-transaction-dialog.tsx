@@ -76,7 +76,7 @@ interface UpsertTransactionDialogProps {
   transactionId?: string;
   setIsOpen: (isOpen: boolean) => void;
 }
-
+  
 const UpsertTransactionDialog = ({
   isOpen,
   defaultValues,
@@ -97,7 +97,7 @@ const UpsertTransactionDialog = ({
 
   const onSubmit = async (data: FormSchema) => {
     try {
-      await upsertTransaction({...data, id: transactionId});
+      await upsertTransaction({ ...data, id: transactionId });
       setIsOpen(false);
       form.reset();
     } catch (error) {
