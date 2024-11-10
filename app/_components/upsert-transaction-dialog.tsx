@@ -40,7 +40,7 @@ import {
   TransactionPaymentMethod,
   TransactionType,
 } from "@prisma/client";
-import { upsertTransaction } from "../_actions/add-transaction";
+import { upsertTransaction } from "../_actions/upsert-transaction";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export const formSchema = z.object({
@@ -83,11 +83,13 @@ const UpsertTransactionDialog = ({
   transactionId,
   setIsOpen,
 }: UpsertTransactionDialogProps) => {
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: defaultValues ?? {
       amount: 0,
       category: TransactionCategory.OTHER,
+      date: new Date(),
       name: "",
       paymentMethod: TransactionPaymentMethod.CASH,
       type: TransactionType.EXPENSE,
@@ -95,9 +97,6 @@ const UpsertTransactionDialog = ({
   });
 
   const onSubmit = async (data: FormSchema) => {
-    console.log(data);
-    return;
-    
     try {
       await upsertTransaction({ ...data, id: transactionId });
       setIsOpen(false);

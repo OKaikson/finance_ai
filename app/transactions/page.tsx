@@ -30,7 +30,7 @@ const TransactionsPage = async () => {
 
         <DataTable
           columns={transactionColumns}
-          data={JSON.parse(JSON.stringify(transactions))}
+          data={transactions}
         />
       </div>
     </>
