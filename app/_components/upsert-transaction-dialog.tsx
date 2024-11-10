@@ -88,7 +88,6 @@ const UpsertTransactionDialog = ({
     defaultValues: defaultValues ?? {
       amount: 0,
       category: TransactionCategory.OTHER,
-      date: new Date(),
       name: "",
       paymentMethod: TransactionPaymentMethod.CASH,
       type: TransactionType.EXPENSE,
@@ -96,6 +95,9 @@ const UpsertTransactionDialog = ({
   });
 
   const onSubmit = async (data: FormSchema) => {
+    console.log(data);
+    return;
+    
     try {
       await upsertTransaction({ ...data, id: transactionId });
       setIsOpen(false);
