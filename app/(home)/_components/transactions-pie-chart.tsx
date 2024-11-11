@@ -42,6 +42,7 @@ const TransactionsPieChart = ({
   expensesTotal,
   typesPercentage,
 }: TransactionsPieChartProps) => {
+  
   const chartData = [
     {
       type: TransactionType.DEPOSIT,
