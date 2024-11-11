@@ -17,6 +17,7 @@ const MONTH_OPTIONS = [
   { value: "11", label: "Novembro" },
   { value: "12", label: "Dezembro" },
 ];
+
 const TimeSelect = () => {
 const searchParams = useSearchParams()
 const month = searchParams.get('month')

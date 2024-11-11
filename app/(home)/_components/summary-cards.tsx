@@ -49,6 +49,7 @@ const SummaryCards = async ({month} : SummaryCards) => {
         title="Saldo"
         amount={balances}
         size="large"
+        background="bg-white bg-opacity-5"
       />
 
       <div className="grid grid-cols-3 gap-6">
@@ -56,6 +57,7 @@ const SummaryCards = async ({month} : SummaryCards) => {
           icon={<PiggyBankIcon size={16} />}
           title="Investido"
           amount={investmentesTotal}
+          background="bg-white bg-opacity-5"
         />
 
         <SummaryCard
