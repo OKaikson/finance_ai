@@ -1,6 +1,12 @@
-"use client"
+"use client";
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/app/_components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/app/_components/ui/select";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const MONTH_OPTIONS = [
@@ -19,17 +25,17 @@ const MONTH_OPTIONS = [
 ];
 
 const TimeSelect = () => {
-const searchParams = useSearchParams()
-const month = searchParams.get('month')
-const { push } = useRouter();
-    const handleMonthChange = (month: string) => {
-        push(`/?month=${month}`)
-    }
+  const searchParams = useSearchParams();
+  const month = searchParams.get("month");
+  const { push } = useRouter();
+  const handleMonthChange = (month: string) => {
+    push(`/?month=${month}`);
+  };
 
   return (
     <Select
       onValueChange={(value) => handleMonthChange(value)}
-      defaultValue={month ?? ''}
+      defaultValue={month ?? ""}
     >
       <SelectTrigger className="w-[150px] rounded-full">
         <SelectValue placeholder="Mês" />
