@@ -6,7 +6,7 @@ import { auth } from "@clerk/nextjs/server";
 export const getDashboard = async (month: string) => {
   const { userId } = await auth();
   if (!userId) {
-    throw new Error("Unauthorized");
+    throw new Error("Não autorizado");
   }
   const where = {
     userId,
