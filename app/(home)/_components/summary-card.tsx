@@ -8,6 +8,7 @@ interface SummaryCardProps {
   amount: number;
   size?: "small" | "large";
   background?: string;
+  userCanAddTransaction?: boolean;
 }
 
 const SummaryCard = ({
@@ -15,7 +16,8 @@ const SummaryCard = ({
   title,
   amount,
   size = "small",
-  background
+  background,
+  userCanAddTransaction
 }: SummaryCardProps) => {
   return (
     <Card className={`${background}`}>
@@ -39,7 +41,7 @@ const SummaryCard = ({
         </p>
 
         <div className="flex ">
-            {size === "large" && <AddTransactionButton />}
+            {size === "large" && <AddTransactionButton userCanAddTransaction={Boolean(userCanAddTransaction)} />}
         </div>
       </CardContent>
     </Card>
