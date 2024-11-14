@@ -8,7 +8,7 @@ import { Tooltip, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
 import { TooltipContent } from "@radix-ui/react-tooltip";
 
 interface AddTransactionButtonProps {
-  userCanAddTransaction: boolean;
+  userCanAddTransaction?: boolean;
 }
 
 const AddTransactionButton = ({
