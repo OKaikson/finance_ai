@@ -42,6 +42,7 @@ import {
 } from "@prisma/client";
 import { upsertTransaction } from "../_actions/upsert-transaction";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "../_hooks/use-toast";
 
 export const formSchema = z.object({
   name: z.string().trim().min(1, {
@@ -101,6 +102,9 @@ const UpsertTransactionDialog = ({
       await upsertTransaction({ ...data, id: transactionId });
       setIsOpen(false);
       form.reset();
+      toast({
+        description: "Transação inserida com sucesso!",
+      })
     } catch (error) {
       console.log(error);
     }

@@ -12,7 +12,7 @@ import {
   DialogTrigger,
 } from "@/app/_components/ui/dialog";
 import { BotIcon, Loader2Icon } from "lucide-react";
-import { generateAiReport } from "../_actions/generate-ai-report";
+import { geminiGenerate } from "../_actions/generate-ai-report";
 import { useState } from "react";
 import { ScrollArea } from "@/app/_components/ui/scroll-area";
 import Markdown from "react-markdown";
@@ -29,9 +29,10 @@ const AiReportButton = ({ month, hasPremiumPlan }: AiReportButtonProps) => {
   const handleGenerateReportClick = async () => {
     try {
       setReportIsLoading(true);
-      const aiReport = await generateAiReport({ month });
+      // const aiReport = await generateAiReport({ month });
+      const aiReport = await geminiGenerate({ month });
       console.log({ aiReport });
-      setReport(aiReport);
+      // setReport(aiReport);
     } catch (error) {
       console.error(error);
     } finally {
